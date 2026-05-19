@@ -1,115 +1,120 @@
 #include <stdio.h>
 
-void displayMenu() {
+char *softDrinks[5] = {
+    "Coke", "Sprite", "Royal", "Pepsi", "Mountain Dew"
+};
+float softPrices[5] = {25, 25, 25, 25, 25};
+
+char *junkFoods[5] = {
+    "Chips", "Cheetos", "Piattos", "Nova", "Pringles"
+};
+float junkPrices[5] = {15, 20, 18, 22, 35};
+
+char *waterStore[5] = {
+    "Bottled Water", "Mineral Water", "Distilled Water", "Sparkling Water", "Purified Water"
+};
+float waterPrices[5] = {10, 12, 15, 20, 18};
+
+char *liquorStore[5] = {
+    "San Miguel Beer", "Red Horse", "Alfonso", "The Bar", "Tanduay Select"
+};
+float liquorPrices[5] = {150, 150, 200, 250, 120};
+
+void displayStores() {
     printf("=================================\n");
-    printf("        VENDING MACHINE          \n");
+    printf("        SELECT STORE            \n");
     printf("=================================\n");
-    printf("=================================\n");
-    printf("        Liqour Store             \n");
-    printf("=================================\n");
-    printf("1. San Miguel Beer       - PHP 150.00\n");
-    printf("2. Red Horse             - PHP 150.00\n");
-    printf("3. Alfonso               - PHP 200.00\n");
-    printf("4. The Bar               - PHP 250.00\n");
-    printf("5. Tanduay Select        - PHP 120.00\n");
+    printf("1. Soft Drinks\n");
+    printf("2. Junk Foods\n");
+    printf("3. Water\n");
+    printf("4. Liquor Store\n");
     printf("=================================\n");
 }
 
-float calculateTotal(int choice, int quantity) {
-    float price = 0;
-
-    switch(choice) {
-        case 1:
-            price = 150.00;
-            break;
-        case 2:
-            price = 150.00;
-            break;
-        case 3:
-            price = 200.00;
-            break;
-        case 4:
-            price = 250.00;
-            break;
-        case 5:
-            price = 120.00;
-            break;
-        default:
-            printf("Invalid product choice!\n");
-    }
-
-    return price * quantity;
-}
-
-void getProductName(int choice, char product[]) {
-    switch(choice) {
-        case 1:
-            sprintf(product, "San Miguel Beer");
-            break;
-        case 2:
-            sprintf(product, "Red Horse");
-            break;
-        case 3:
-            sprintf(product, "Alfonso");
-            break;
-        case 4:
-            sprintf(product, "The Bar");
-            break;
-        case 5:
-            sprintf(product, "Tanduay Select");
-            break;
-        default:
-            sprintf(product, "Unknown");
-    }
-}
-
-void printReceipt(int choice, int quantity, float total, float money, float change) {
-    char product[20];
-
-    getProductName(choice, product);
-
+void printReceipt(char *product, int quantity, float total, float money, float change) {
     printf("\n=========== RECEIPT ===========\n");
-    printf("Product: %s\n", product);
+    printf("Product : %s\n", product);
     printf("Quantity: %d\n", quantity);
-    printf("The Total Price: PHP %.2f\n", total);
-    printf("Your Cash: PHP %.2f\n", money);
-    printf("Your Change: PHP %.2f\n", change);
+    printf("Total   : PHP %.2f\n", total);
+    printf("Cash    : PHP %.2f\n", money);
+    printf("Change  : PHP %.2f\n", change);
     printf("================================\n");
     printf("Thank you for your purchase!\n");
 }
 
 int main() {
-    int choice, quantity;
+    int store, choice, quantity;
     float total, money, change;
+    char *product;
 
-    displayMenu();
+    displayStores();
 
-    printf("Enter the product number you want to buy: ");
-    scanf("%d", &choice);
-    
-    if(choice >5 || choice<1){
-        printf("Invalid Choice");
-        return 1;
+    printf("Enter store number: ");
+    scanf("%d", &store);
+
+    char **items;
+    float *prices;
+
+    if (store == 1) {
+        items = softDrinks;
+        prices = softPrices;
+    } 
+    else if (store == 2) {
+        items = junkFoods;
+        prices = junkPrices;
+    } 
+    else if (store == 3) {
+        items = waterStore;
+        prices = waterPrices;
+    } 
+    else if (store == 4) {
+        items = liquorStore;
+        prices = liquorPrices;
+    } 
+    else {
+        printf("Invalid store!\n");
+        return 0;
     }
 
-    printf("How many would you like to buy? ");
+    printf("\n=================================\n");
+    printf("        AVAILABLE PRODUCTS       \n");
+    printf("=================================\n");
+
+    for (int i = 0; i < 5; i++) {
+        printf("%d. %s - PHP %.2f\n", i + 1, items[i], prices[i]);
+    }
+
+    printf("=================================\n");
+
+    printf("Enter product number: ");
+    scanf("%d", &choice);
+
+    if (choice < 1 || choice > 5) {
+        printf("Invalid product!\n");
+        return 0;
+    }
+
+    printf("Enter quantity: ");
     scanf("%d", &quantity);
 
-    total = calculateTotal(choice, quantity);
+    total = prices[choice - 1] * quantity;
 
     printf("\nTotal amount is PHP %.2f\n", total);
+
     printf("Enter your money: PHP ");
     scanf("%f", &money);
 
-    if(money < total) {
+    if (money < total) {
         printf("\nInsufficient money!\n");
         printf("You need PHP %.2f more.\n", total - money);
-    } else {
-        
-        change = money - total;
-
-        printReceipt(choice, quantity, total, money, change);
+        return 0;
     }
+
+    change = money - total;
+
+    product = items[choice - 1];
+
+    printReceipt(product, quantity, total, money, change);
 
     return 0;
 }
