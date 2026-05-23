@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 char *softDrinks[5] = {
     "Coke", "Sprite", "Royal", "Pepsi", "Mountain Dew"
@@ -31,6 +32,25 @@ void displayStores() {
     printf("=================================\n");
 }
 
+void saveToFile(char *product, int quantity, float total, float money, float change) {
+    FILE *file = fopen("sales.txt", "a");
+
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    fprintf(file, "\n=========== RECEIPT ===========\n");
+    fprintf(file, "Product : %s\n", product);
+    fprintf(file, "Quantity: %d\n", quantity);
+    fprintf(file, "Total   : PHP %.2f\n", total);
+    fprintf(file, "Cash    : PHP %.2f\n", money);
+    fprintf(file, "Change  : PHP %.2f\n", change);
+    fprintf(file, "================================\n");
+
+    fclose(file);
+}
+
 void printReceipt(char *product, int quantity, float total, float money, float change) {
     printf("\n=========== RECEIPT ===========\n");
     printf("Product : %s\n", product);
@@ -40,7 +60,10 @@ void printReceipt(char *product, int quantity, float total, float money, float c
     printf("Change  : PHP %.2f\n", change);
     printf("================================\n");
     printf("Thank you for your purchase!\n");
+    saveToFile(product, quantity, total, money, change);
 }
+
+
 
 int main() {
     int store, choice, quantity;
