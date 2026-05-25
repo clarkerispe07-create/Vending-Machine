@@ -21,15 +21,20 @@ char *liquorStore[5] = {
 };
 float liquorPrices[5] = {150, 150, 200, 250, 120};
 
+int softStock[5] = {50, 65, 75, 80, 30};
+int junkStock[5] = {56, 100, 70, 44, 200};
+int waterStock[5] = {20, 15, 10, 8, 12};
+int liquorStock[5] = {30, 50, 20, 50, 40};
+
 void displayStores() {
-    printf("=================================\n");
-    printf("        SELECT STORE            \n");
-    printf("=================================\n");
+    printf("==========================================\n");
+    printf("               SELECT STORE            \n");
+    printf("===========================================\n");
     printf("1. Soft Drinks\n");
     printf("2. Junk Foods\n");
     printf("3. Water\n");
     printf("4. Liquor Store\n");
-    printf("=================================\n");
+    printf("===========================================\n");
 }
 
 void saveToFile(char *product, int quantity, float total, float money, float change) {
@@ -65,6 +70,13 @@ void printReceipt(char *product, int quantity, float total, float money, float c
 
 
 int main() {
+
+   
+
+    char **items;
+    float *prices;
+    int *stock;
+
     int store, choice, quantity;
     float total, money, change;
     char *product;
@@ -72,16 +84,13 @@ int main() {
     storeMenu:
 
     while(1){
-        int backToStoreMenu = 0;
    
     displayStores();
 
     printf("Enter store number: ");
     scanf("%d", &store);
 
-    char **items;
-    float *prices;
-
+    
     if (store < 1 || store > 4) {
         printf("Exiting the program. Goodbye!\n");
         break;
@@ -90,18 +99,22 @@ int main() {
     if (store == 1) {
         items = softDrinks;
         prices = softPrices;
+        stock = softStock;
     } 
     else if (store == 2) {
         items = junkFoods;
         prices = junkPrices;
+        stock = junkStock;
     } 
     else if (store == 3) {
         items = waterStore;
         prices = waterPrices;
+        stock = waterStock;
     } 
     else if (store == 4) {
         items = liquorStore;
         prices = liquorPrices;
+        stock = liquorStock;
     }
     else {
         printf("Invalid store!\n");
@@ -112,14 +125,21 @@ int main() {
 
     while (1){
     
-    printf("\n=================================\n");
-    printf("        AVAILABLE PRODUCTS       \n");
-    printf("=================================\n");
+    printf("\n===========================================\n");
+    printf("            AVAILABLE PRODUCTS       \n");
+    printf("===========================================\n");
 
-    for (int i = 0; i < 5; i++) {
-        printf("%d. %s - PHP %.2f\n", i + 1, items[i], prices[i]);
+   for (int i = 0; i < 5; i++) {
+    if (stock[i] == 0) {
+        printf("%d. %s - OUT OF STOCK\n", i + 1, items[i]);
     }
-    printf("=================================\n");
+    else {
+        printf("%d. %s - PHP %.2f | Stock: %d\n",
+               i + 1, items[i], prices[i], stock[i]);
+    }
+}
+    
+    printf("===========================================\n");
     printf("0. Back to Store Menu\n\n");
 
     
@@ -140,6 +160,8 @@ int main() {
     printf("\nEnter quantity (0 = Back to Products Menu): ");
     scanf("%d", &quantity);
 
+    
+
     if (quantity == 0) {
          goto productMenu;
     }
@@ -149,6 +171,16 @@ int main() {
         continue;
     }
 
+    if (quantity > stock[choice - 1]) {
+    printf("Only %d item(s) available!\n",
+           stock[choice - 1]);
+    continue;
+}
+
+    if (stock[choice - 1] == 0) {
+    printf("Sorry! Product is OUT OF STOCK.\n");
+    continue;
+}
     total = prices[choice - 1] * quantity;
 
     while(1){
@@ -169,26 +201,17 @@ int main() {
     
     change = money - total;
     product = items[choice - 1];
+    
+    stock[choice - 1] = stock[choice - 1] - quantity;
 
     printReceipt(product, quantity, total, money, change);
-    backToStoreMenu = 1;
-   return 0;
+    return 0;
     } 
-    if (backToStoreMenu){        
-            continue;
     }
     break;
     }  
-    if (backToStoreMenu) {
     break;
     }
-    if (backToStoreMenu) {
-    break;
-    }
-        break;
-        }
-        break;
-     }
     
     return 0;
     
