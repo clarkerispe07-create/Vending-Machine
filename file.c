@@ -64,12 +64,16 @@ void printReceipt(char *product, int quantity, float total, float money, float c
 }
 
 
-
 int main() {
     int store, choice, quantity;
     float total, money, change;
     char *product;
+    
+    storeMenu:
 
+    while(1){
+        int backToStoreMenu = 0;
+   
     displayStores();
 
     printf("Enter store number: ");
@@ -77,6 +81,11 @@ int main() {
 
     char **items;
     float *prices;
+
+    if (store < 1 || store > 4) {
+        printf("Exiting the program. Goodbye!\n");
+        break;
+    }
 
     if (store == 1) {
         items = softDrinks;
@@ -93,12 +102,16 @@ int main() {
     else if (store == 4) {
         items = liquorStore;
         prices = liquorPrices;
-    } 
+    }
     else {
         printf("Invalid store!\n");
         return 0;
     }
 
+    productMenu:
+
+    while (1){
+    
     printf("\n=================================\n");
     printf("        AVAILABLE PRODUCTS       \n");
     printf("=================================\n");
@@ -106,38 +119,77 @@ int main() {
     for (int i = 0; i < 5; i++) {
         printf("%d. %s - PHP %.2f\n", i + 1, items[i], prices[i]);
     }
-
     printf("=================================\n");
+    printf("0. Back to Store Menu\n\n");
 
+    
     printf("Enter product number: ");
     scanf("%d", &choice);
 
+    if (choice == 0) {
+      goto storeMenu;
+    }
+     
     if (choice < 1 || choice > 5) {
         printf("Invalid product!\n");
-        return 0;
+        continue;
+    }
+    quantityMenu:
+    while(1){
+
+    printf("\nEnter quantity (0 = Back to Products Menu): ");
+    scanf("%d", &quantity);
+
+    if (quantity == 0) {
+         goto productMenu;
     }
 
-    printf("Enter quantity: ");
-    scanf("%d", &quantity);
+    if (quantity < 0) {
+        printf("Invalid quantity!\n");
+        continue;
+    }
 
     total = prices[choice - 1] * quantity;
 
-    printf("\nTotal amount is PHP %.2f\n", total);
+    while(1){
 
-    printf("Enter your money: PHP ");
+    printf("\nTotal amount is PHP %.2f\n", total);
+    printf("Enter your money (0 = Back to Quantity Menu): PHP ");
     scanf("%f", &money);
 
+    if (money == 0) {
+        goto quantityMenu;
+    }
+    
     if (money < total) {
         printf("\nInsufficient money!\n");
         printf("You need PHP %.2f more.\n", total - money);
-        return 0;
+        continue;
     }
-
+    
     change = money - total;
-
     product = items[choice - 1];
 
     printReceipt(product, quantity, total, money, change);
-
+    backToStoreMenu = 1;
+   return 0;
+    } 
+    if (backToStoreMenu){        
+            continue;
+    }
+    break;
+    }  
+    if (backToStoreMenu) {
+    break;
+    }
+    if (backToStoreMenu) {
+    break;
+    }
+        break;
+        }
+        break;
+     }
+    
     return 0;
+    
 }
