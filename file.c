@@ -206,11 +206,9 @@ int main() {
 
     printReceipt(product, quantity, total, money, change);
     return 0;
-    } 
-    }
-    break;
-    }  
-    break;
+                } 
+            }
+        }  
     }
     
     return 0;
