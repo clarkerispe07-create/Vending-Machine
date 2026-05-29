@@ -1,40 +1,88 @@
 
 =========== RECEIPT ===========
-Product : Coke
+Product : ColdBrew
 Quantity: 1
-Total   : PHP 0.00
-Cash    : PHP 0.00
-Change  : PHP 0.00
-================================
-
-=========== RECEIPT ===========
-Product : Chips
-Quantity: 20
-Total   : PHP 300.00
+Total   : PHP 45.00
 Cash    : PHP 500.00
-Change  : PHP 200.00
+Change  : PHP 455.00
 ================================
 
 =========== RECEIPT ===========
-Product : Tanduay Select
-Quantity: 2
-Total   : PHP 240.00
-Cash    : PHP 500.00
-Change  : PHP 260.00
-================================
-
-=========== RECEIPT ===========
-Product : Nova
-Quantity: 3
-Total   : PHP 66.00
-Cash    : PHP 100.00
-Change  : PHP 34.00
-================================
-
-=========== RECEIPT ===========
-Product : Coke
+Product : ColdBrew
 Quantity: 1
-Total   : PHP 25.00
-Cash    : PHP 100.00
-Change  : PHP 75.00
+Total   : PHP 45.00
+Cash    : PHP 455.00
+Change  : PHP 410.00
+================================
+
+=========== RECEIPT ===========
+Product : ColdBrew
+Quantity: 1
+Total   : PHP 45.00
+Cash    : PHP 410.00
+Change  : PHP 365.00
+================================
+
+=========== RECEIPT ===========
+Product : MatchaLatte
+Quantity: 1
+Total   : PHP 55.00
+Cash    : PHP 365.00
+Change  : PHP 310.00
+================================
+
+=========== RECEIPT ===========
+Product : MatchaLatte
+Quantity: 1
+Total   : PHP 55.00
+Cash    : PHP 310.00
+Change  : PHP 255.00
+================================
+
+=========== RECEIPT ===========
+Product : ColdBrew
+Quantity: 1
+Total   : PHP 45.00
+Cash    : PHP 500.00
+Change  : PHP 455.00
+================================
+
+=========== RECEIPT ===========
+Product : ColdBrew
+Quantity: 1
+Total   : PHP 45.00
+Cash    : PHP 455.00
+Change  : PHP 410.00
+================================
+
+=========== RECEIPT ===========
+Product : ColdBrew
+Quantity: 1
+Total   : PHP 45.00
+Cash    : PHP 410.00
+Change  : PHP 365.00
+================================
+
+=========== RECEIPT ===========
+Product : ColdBrew
+Quantity: 1
+Total   : PHP 45.00
+Cash    : PHP 365.00
+Change  : PHP 320.00
+================================
+
+=========== RECEIPT ===========
+Product : ColdBrew
+Quantity: 1
+Total   : PHP 45.00
+Cash    : PHP 320.00
+Change  : PHP 275.00
+================================
+
+=========== RECEIPT ===========
+Product : ColdBrew
+Quantity: 1
+Total   : PHP 45.00
+Cash    : PHP 275.00
+Change  : PHP 230.00
 ================================

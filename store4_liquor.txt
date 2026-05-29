@@ -1,0 +1,5 @@
+CraftBeer,75.00,12
+RedWineGlass,120.00,6
+WhiskeyShot,90.00,15
+ClassicGin,80.00,10
+VodkaTonic,85.00,8

@@ -1,0 +1,5 @@
+ColdBrew,45.00,3
+MatchaLatte,55.00,8
+IcedAmericano,40.00,15
+SodaCranberry,30.00,20
+MineralWater,15.00,30

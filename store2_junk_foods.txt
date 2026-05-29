@@ -1,0 +1,5 @@
+TruffleChips,35.00,15
+LoadedNachos,60.00,8
+MozzSticks,50.00,10
+SaltedPretzel,25.00,12
+GarlicBread,20.00,15
